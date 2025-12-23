@@ -4,20 +4,21 @@ import fs from 'fs'
 import path from 'path'
 import { z } from 'zod'
 
-// Load .env file
-const ENV_PATH = path.resolve('.env')
-if (!fs.existsSync(ENV_PATH)) {
-  Logger.error(`Configuration file "${ENV_PATH}" not found.`)
-  process.exit(1)
-}
-loadDotenv({ path: ENV_PATH })
-
 // Define allowed environments (for future use if needed)
 export enum Environment {
   Development = 'development',
   Production = 'production',
   Test = 'test',
   Provision = 'provision',
+}
+
+// Load .env file
+const ENV_PATH = path.resolve('.env')
+if (process.env.NODE_ENV !== Environment.Production) {
+  if (!fs.existsSync(ENV_PATH)) {
+    throw new Error(`Missing .env at ${ENV_PATH} (local dev)`)
+  }
+  loadDotenv({ path: ENV_PATH })
 }
 
 export const CODE_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
