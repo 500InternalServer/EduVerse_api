@@ -30,7 +30,7 @@ import { CartModule } from './routes/cart/cart.module'
 import { WishlistModule } from './routes/wishlist/wishlist.module'
 import { OrderModule } from './routes/order/order.module'
 import { SearchModule } from './routes/search/search.module'
-import { QaModule } from './routes/qa/qa.module';
+import { QaModule } from './routes/qa/qa.module'
 
 const TIME_THROTTLER = 60
 const LIMIT_THROTTLER = 20
@@ -49,7 +49,7 @@ const LIMIT_THROTTLER = 20
     LessonModule,
     ConfigModule.forRoot({
       isGlobal: true,
-      ignoreEnvFile: process.env.NODE_ENV === 'production',
+      ignoreEnvFile: true,
     }),
     CouponModule,
     CategoryModule,
@@ -85,7 +85,7 @@ const LIMIT_THROTTLER = 20
     },
     {
       provide: APP_GUARD,
-      useClass: AuthenticationGuard,  
+      useClass: AuthenticationGuard,
     },
     // { provide: APP_GUARD, useClass: PermissionGuard },
     { provide: APP_INTERCEPTOR, useClass: ZodSerializerInterceptor },
