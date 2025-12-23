@@ -1,4 +1,4 @@
-<h1 align="center">🎓 Elearning API Version 2</h1>
+<h1 align="center">🎓 EduVerse</h1>
 
 <p align="center">
   <img src="https://cdn-icons-png.flaticon.com/512/10180/10180874.png" width="140" alt="E-Learning Logo" />
@@ -148,8 +148,8 @@ elearning-api-v2/
 ### 📦 1. Clone and Install
 
 ```bash
-git clone https://github.com/Newbies-Coder/elearning-platform-api-v2.git
-cd elearning-api-v2
+git clone https://github.com/500InternalServer/EduVerse_api.git
+cd EduVerse_api
 npm install
 ```
 
@@ -384,10 +384,10 @@ Built with ❤️ by the **New Bie Coder Team**:
 <table align="center">
   <tr>
     <td align="center">
-      <a href="https://github.com/qoucname2202">
-        <img src="https://avatars.githubusercontent.com/qoucname2202" width="100px;" alt="Dương Quốc Nam"/>
-        <br /><sub><b>Dương Quốc Nam</b></sub>
-      </a><br />💻 📝
+      <a href="https://github.com/Vix1311">
+        <img src="https://avatars.githubusercontent.com/u/166972180?v=4" width="100px;" alt="Mai Kỳ Vĩ"/>
+        <br /><sub><b>Mai Kỳ Vĩ</b></sub>
+      </a><br />💻
     </td>
     <td align="center">
       <a href="https://github.com/truongquangquoc2011">
