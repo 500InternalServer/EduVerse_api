@@ -87,7 +87,7 @@ const LIMIT_THROTTLER = 20
       provide: APP_GUARD,
       useClass: AuthenticationGuard,
     },
-    // { provide: APP_GUARD, useClass: PermissionGuard },
+    { provide: APP_GUARD, useClass: PermissionGuard },
     { provide: APP_INTERCEPTOR, useClass: ZodSerializerInterceptor },
     {
       provide: APP_FILTER,

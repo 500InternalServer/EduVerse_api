@@ -166,15 +166,44 @@ async function bootstrap() {
 
   const clientPermissions = allPermissions.filter(
     (p) =>
-      p.method === 'GET' &&
-      (/(course|category|lesson)/.test(p.path) ||
-        /teachers\/.*\/(followers|following)/.test(p.path) ||
-        /profile/.test(p.path)),
+      // READ (GET)
+      (p.method === 'GET' &&
+        (/(course|category|lesson|hashtag)/.test(p.path) ||
+          /teachers\/.*\/(followers|following)/.test(p.path) ||
+          /users\/teachers/.test(p.path) ||
+          /profile/.test(p.path) ||
+          /wishlist/.test(p.path) ||
+          /cart/.test(p.path) ||
+          /conversations/.test(p.path) ||
+          /qa\/client/.test(p.path))) ||
+      // WRITE for client features
+      (['POST', 'PATCH', 'PUT', 'DELETE'].includes(p.method) &&
+        (/cart/.test(p.path) ||
+          /wishlist/.test(p.path) ||
+          /orders\/(buy-now|cart-checkout)/.test(p.path) ||
+          /enroll\/request/.test(p.path) ||
+          /conversations/.test(p.path) ||
+          /qa\/client/.test(p.path) ||
+          /teachers\/.*\/(follow|unfollow)/.test(p.path) ||
+          /auth\/(profile|avatar|logout)/.test(p.path))),
   )
 
   const sellerPermissions = allPermissions.filter(
     (p) =>
-      ['POST', 'PUT', 'PATCH', 'DELETE'].includes(p.method) && /(course|module|lesson|enroll|teachers)/.test(p.path),
+      // SELLER WRITE
+      (['POST', 'PUT', 'PATCH', 'DELETE'].includes(p.method) &&
+        (/(course|module|lesson|enroll|teachers)/.test(p.path) ||
+          /quizzes/.test(p.path) ||
+          /coupon/.test(p.path) ||
+          /qa\/seller/.test(p.path) ||
+          /users\/.*\/ensure-teacher/.test(p.path))) ||
+      // SELLER READ (builder + management)
+      (p.method === 'GET' &&
+        (/(course|module|lesson)/.test(p.path) ||
+          /builder/.test(p.path) ||
+          /quizzes/.test(p.path) ||
+          /qa\/seller/.test(p.path) ||
+          /coupon/.test(p.path))),
   )
 
   const sellerPlusClient = [...new Set([...sellerPermissions.map((p) => p.id), ...clientPermissions.map((p) => p.id)])]
