@@ -46,6 +46,7 @@ import { ApiStandardResponses } from 'src/shared/decorator/api-standard-response
 import { FileInterceptor } from '@nestjs/platform-express'
 import { CloudinaryService } from 'src/shared/services/cloudinary.service'
 import z from 'zod'
+import { multerPdfOptions } from 'src/shared/utils/multer.util'
 
 /**
  * Simple DTO used to describe the response of upload endpoints.
@@ -353,7 +354,7 @@ export class ConversationController {
    */
   @Post('upload/pdf')
   @Auth([AuthTypes.BEARER])
-  @UseInterceptors(FileInterceptor('file'))
+  @UseInterceptors(FileInterceptor('file', multerPdfOptions))
   @HttpCode(HttpStatus.OK)
   @ApiOperation({
     summary: 'Upload PDF document',
