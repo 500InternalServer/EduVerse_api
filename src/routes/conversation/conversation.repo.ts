@@ -10,7 +10,6 @@ import {
 import { PAGINATION } from 'src/shared/constants/pagination.constant'
 import {
   ConversationNotFoundException,
-  DirectConversationMustUseTeacherEndpointException,
   MessageNotFoundException,
   UserMustFollowTeacherToChatException,
   UserNotInConversationException,
@@ -93,9 +92,6 @@ export class ConversationRepository {
    * @returns Newly created conversation record
    */
   async createConversation(data: CreateConversationBodyType, createdById: number): Promise<ConversationResponseType> {
-    if (data.type === ConversationType.DIRECT) {
-      throw DirectConversationMustUseTeacherEndpointException
-    }
     const participantIds = new Set([...data.participantIds, createdById])
     return this.prismaService.$transaction(async (tx) => {
       return tx.conversation.create({
