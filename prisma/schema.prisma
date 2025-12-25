@@ -1921,6 +1921,7 @@ enum ConversationType {
   DIRECT
   GROUP
   SUPPORT
+  CHATBOT
 }
 
 enum ParticipantRole {

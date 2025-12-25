@@ -381,7 +381,7 @@ export class ConversationService {
 
   async getOrCreateDirectWithTeacherUserId(userId: number, teacherUserId: number) {
     const teacherId = await this.conservationRepository.getTeacherIdByUserId(teacherUserId)
-    if (!teacherId) throw UserMustFollowTeacherToChatException 
+    if (!teacherId) throw UserMustFollowTeacherToChatException
 
     await this.conservationRepository.assertUserFollowsTeacher(userId, teacherId)
 
