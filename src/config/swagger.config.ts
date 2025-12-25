@@ -38,7 +38,7 @@ export class SwaggerConfigService {
       .addApiKey(apiKeyOptions, 'Api-Key-Auth')
 
     if (!isProd) {
-      builder.addServer(this.config.get<string>('SWAGGER_SERVER_DEV') || envConfig.appBaseUrl, Environment.Development)
+      builder.addServer(this.config.get<string>('START_URL') || envConfig.startUrl, Environment.Development)
     }
 
     builder.addServer(
