@@ -1,6 +1,14 @@
 import { DocumentBuilder, OpenAPIObject } from '@nestjs/swagger'
 import { Injectable } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
+import { envConfig } from 'src/shared/config'
+
+export enum Environment {
+  Development = 'development',
+  Production = 'production',
+  Test = 'test',
+  Provision = 'provision',
+}
 
 @Injectable()
 export class SwaggerConfigService {
@@ -20,14 +28,24 @@ export class SwaggerConfigService {
       description: 'Enter your API key to access this endpoint',
     }
 
-    return new DocumentBuilder()
+    const isProd = this.config.get('NODE_ENV_PROD') === Environment.Development
+
+    const builder = new DocumentBuilder()
       .setTitle(this.config.get<string>('APP_TITLE') || 'EduVerse')
       .setDescription(this.config.get<string>('APP_DESCRIPTION') || 'An advanced elearning platform backend')
       .setVersion(this.config.get<string>('APP_VERSION') || '1.0')
       .addBearerAuth(authOptions, 'JWT-Auth')
       .addApiKey(apiKeyOptions, 'Api-Key-Auth')
-      .addServer(this.config.get<string>('SWAGGER_SERVER_DEV') || 'http://localhost:8080', 'Development')
-      .addServer(this.config.get<string>('SWAGGER_SERVER_PROD') || 'https://eduverseapi-production.up.railway.app', 'Production')
-      .build()
+
+    if (!isProd) {
+      builder.addServer(this.config.get<string>('SWAGGER_SERVER_DEV') || envConfig.appBaseUrl, Environment.Development)
+    }
+
+    builder.addServer(
+      this.config.get<string>('SWAGGER_SERVER_PROD') || envConfig.swaggerServerProd,
+      Environment.Production,
+    )
+
+    return builder.build()
   }
 }
