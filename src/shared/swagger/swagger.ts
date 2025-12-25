@@ -20,6 +20,12 @@ export function setupSwagger(app: INestApplication) {
   const swaggerConfig = new SwaggerConfigService(configService).build()
   const document = SwaggerModule.createDocument(app, swaggerConfig)
 
+  const webBaseUrl = configService.get<string>('WEB_BASE_URL') || ''
+  const apiPrefix = configService.get<string>('API_PREFIX') || '/api/v1'
+  document.servers = [
+    { url: `${webBaseUrl}${apiPrefix}`.replace(/\/+$/, ''), description: 'API' },
+  ]
+
   SwaggerModule.setup('docs', app, document, {
     swaggerOptions: {
       persistAuthorization: true,

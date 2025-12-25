@@ -127,6 +127,7 @@ const EnvSchema = z.object({
   ELASTICSEARCH: z.string().url(),
   FRONTEND_SUCCESS_URL: z.string().url({ message: 'FRONTEND_SUCCESS_URL must be a valid URL' }),
   FRONTEND_FAIL_URL: z.string().url({ message: ' FRONTEND_FAIL_URL must be a valid URL' }),
+  WEB_BASE_URL: z.string().url({ message: ' WEB_BASE_URL must be a valid URL' }),
 })
 
 // Parse and validate process.env
@@ -203,6 +204,7 @@ export const envConfig = {
   elasticSearch: parsedEnv.data.ELASTICSEARCH,
   frontendSuccessUrl: parsedEnv.data.FRONTEND_SUCCESS_URL,
   frontendFailUrl: parsedEnv.data.FRONTEND_FAIL_URL,
+  webBaseUrl: parsedEnv.data.WEB_BASE_URL,
 }
 
 export const ConfigGroups = {
