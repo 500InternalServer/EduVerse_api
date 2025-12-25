@@ -28,7 +28,7 @@ export class SwaggerConfigService {
       description: 'Enter your API key to access this endpoint',
     }
 
-    const isProd = this.config.get('NODE_ENV_PROD') === Environment.Development
+    const isProd = this.config.get('NODE_ENV_PROD') === Environment.Production
 
     const builder = new DocumentBuilder()
       .setTitle(this.config.get<string>('APP_TITLE') || 'EduVerse')
