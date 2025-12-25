@@ -27,7 +27,7 @@ export class SwaggerConfigService {
       .addBearerAuth(authOptions, 'JWT-Auth')
       .addApiKey(apiKeyOptions, 'Api-Key-Auth')
       .addServer(this.config.get<string>('SWAGGER_SERVER_DEV') || 'http://localhost:8080', 'Development')
-      .addServer(this.config.get<string>('SWAGGER_SERVER_PROD') || 'https://api.eduverse.com', 'Production')
+      .addServer(this.config.get<string>('SWAGGER_SERVER_PROD') || 'https://eduverseapi-production.up.railway.app', 'Production')
       .build()
   }
 }
