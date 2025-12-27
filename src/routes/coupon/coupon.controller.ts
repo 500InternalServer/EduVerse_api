@@ -119,7 +119,7 @@ export class CouponController {
     description: 'Retrieve coupon details by ID. Throws if not found or deleted.',
   })
   @ApiParam({ name: 'id', type: Number, description: 'Coupon ID' })
-  @ZodSerializerDto(CreateCouponResDTO)
+  // @ZodSerializerDto(CreateCouponResDTO)
   @ApiStandardResponses(HttpStatusCode.OK, RESPONSE_MESSAGES.COUPON.DETAIL, CreateCouponResDTO)
   async findOne(@Param('id', ParseIntPipe) id: number) {
     return this.couponService.findOne(id)
@@ -144,7 +144,7 @@ export class CouponController {
   })
   @ApiQuery({ name: 'skip', required: false, type: Number, description: 'Records to skip' })
   @ApiQuery({ name: 'take', required: false, type: Number, description: 'Records to take' })
-  @ZodSerializerDto(CreateCouponResDTO)
+  // @ZodSerializerDto(CreateCouponResDTO)
   @ApiStandardResponses(HttpStatusCode.OK, RESPONSE_MESSAGES.COUPON.LIST, CreateCouponResDTO)
   async listCoupon(@ActiveUser('userId') userId: number, @Query('skip') skip?: string, @Query('take') take?: string) {
     const { skip: parsedSkip, take: parsedTake } = parseSkipTake(skip, take)
