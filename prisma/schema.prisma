@@ -387,6 +387,7 @@ model Course {
   cart               Cart[]            @relation("CourseCart")
   feedback           Feedback[]        @relation("courseFeedback")
   qaThreads          QaThread[]
+  recommendedInMessages MessageCourseRecommendation[]
 
   @@index([createdAt])
   @@index([categoryId])
@@ -1498,7 +1499,23 @@ model Message {
   @@index([replyToMessageId], name: "message_reply_index")
   @@index([isDeleted], name: "message_deleted_index")
   @@index([messageType], name: "message_type_index")
+  recommendations MessageCourseRecommendation[]
 }
+model MessageCourseRecommendation {
+  id        Int      @id @default(autoincrement())
+  messageId Int
+  courseId  Int
+  rank      Int      @default(0)
+  createdAt DateTime @default(now())
+
+  message   Message  @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@unique([messageId, courseId])
+  @@index([messageId])
+  @@index([courseId])
+}
+
 
 model MessageRead {
   id        Int      @id @default(autoincrement())
