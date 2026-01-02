@@ -182,7 +182,7 @@ export class QuizzRepository {
         ...(isLessonParent ? { lessonId: ctx.lessonId! } : { moduleId: ctx.moduleId! }),
         title: payload.title,
         description: payload.description ?? null,
-        status: payload.status ?? 'Draft',
+        status: payload.status ?? 'Published',
         createdById: ctx.userId,
       },
       select: QUIZ_PUBLIC_SELECT,

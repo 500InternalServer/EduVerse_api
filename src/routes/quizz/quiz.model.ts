@@ -19,7 +19,7 @@ export const CreateQuizInputSchema = z
       .max(TITLE_MAX_LENGTH, { message: `Title must be at most ${TITLE_MAX_LENGTH} characters` })
       .refine((val) => val.trim().length > 0, { message: 'Title cannot be only whitespace' }),
     description: z.string().nullable().optional(),
-    status: QuizStatus.default('Draft'),
+    status: QuizStatus.default('Published'),
   })
   .strict()
 

@@ -31,6 +31,7 @@ import { WishlistModule } from './routes/wishlist/wishlist.module'
 import { OrderModule } from './routes/order/order.module'
 import { SearchModule } from './routes/search/search.module'
 import { QaModule } from './routes/qa/qa.module'
+import { ChatbotModule } from './routes/chatbot/chatbot.module'
 
 const TIME_THROTTLER = 60
 const LIMIT_THROTTLER = 20
@@ -70,6 +71,7 @@ const LIMIT_THROTTLER = 20
     OrderModule,
     SearchModule,
     QaModule,
+    ChatbotModule,
   ],
   controllers: [],
   providers: [
@@ -87,7 +89,7 @@ const LIMIT_THROTTLER = 20
       provide: APP_GUARD,
       useClass: AuthenticationGuard,
     },
-    { provide: APP_GUARD, useClass: PermissionGuard },
+    // { provide: APP_GUARD, useClass: PermissionGuard },
     { provide: APP_INTERCEPTOR, useClass: ZodSerializerInterceptor },
     {
       provide: APP_FILTER,
