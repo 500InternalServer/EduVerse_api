@@ -13,7 +13,9 @@ async function bootstrap() {
   app.enableCors()
   setupSwagger(app)
 
-  await app.listen(envConfig.port ?? 3000)
+  if (process.env.NODE_ENV !== 'production') {
+    await app.listen(process.env.PORT || 3000);
+  }
 }
 bootstrap()
   
