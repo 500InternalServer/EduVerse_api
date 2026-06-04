@@ -13,13 +13,13 @@ export enum Environment {
 }
 
 // Load .env file
-const ENV_PATH = path.resolve('.env')
-if (process.env.NODE_ENV !== Environment.Production) {
-  if (!fs.existsSync(ENV_PATH)) {
-    throw new Error(`Missing .env at ${ENV_PATH} (local dev)`)
-  }
-  loadDotenv({ path: ENV_PATH })
-}
+// const ENV_PATH = path.resolve('.env')
+// if (process.env.NODE_ENV !== Environment.Production) {
+//   if (!fs.existsSync(ENV_PATH)) {
+//     throw new Error(`Missing .env at ${ENV_PATH} (local dev)`)
+//   }
+//   loadDotenv({ path: ENV_PATH })
+// }
 
 export const CODE_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
 export const DEFAULT_LENGTH = 8
